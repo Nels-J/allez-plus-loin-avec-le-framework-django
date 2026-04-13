@@ -56,7 +56,9 @@ ROOT_URLCONF = 'fotoblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+                BASE_DIR.joinpath('templates'),  # indique à Django de chercher les templates dans le dossier "templates" à la racine du projet
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
