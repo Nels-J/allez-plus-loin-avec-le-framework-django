@@ -57,7 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-                BASE_DIR.joinpath('templates'),  # indique à Django de chercher les templates dans le dossier "templates" à la racine du projet
+                BASE_DIR / 'templates',  # indique à Django de chercher les templates dans le dossier "templates" à la racine du projet
         ],
         'APP_DIRS': True,
         'OPTIONS': {
