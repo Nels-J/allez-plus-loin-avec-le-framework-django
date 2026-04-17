@@ -25,7 +25,8 @@ def login_page(request):
             if user is not None:
                 login(request, user)  # Gère la connexion de l'utilisateur authentifié à la requête
                 return redirect("home")
-            message = "Identifiants invalides."
+            else:
+                message = "Identifiants invalides."
     # Retour en cas de GET ou POST sans erreur
     return render(
         request, "authentication/login.html", context={"form": form, "message": message}
