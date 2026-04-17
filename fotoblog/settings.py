@@ -126,4 +126,4 @@ LOGIN_URL = 'login'  # Défini l'URL de connexion pour les utilisateurs non auth
 
 LOGIN_REDIRECT_URL = 'home'  # Défini l'URL de redirection après une connexion réussie
 
-LOGOUT_REDIRECT_URL = 'home'  # Défini l'URL de redirection après une déconnexion réussie
+LOGOUT_REDIRECT_URL = LOGIN_URL  # Défini l'URL de redirection après une déconnexion réussie
