@@ -102,9 +102,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_URL = 'login'
-
-LOGIN_REDIRECT_URL = 'home'
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
@@ -124,3 +121,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 AUTH_USER_MODEL = 'authentication.User'  # Indique à Django d'utiliser le modèle personnalisé pour les utilisateurs
+
+LOGIN_URL = 'login'  # Défini l'URL de connexion pour les utilisateurs non authentifiés
+
+LOGIN_REDIRECT_URL = 'home'  # Défini l'URL de redirection après une connexion réussie
+
+LOGOUT_REDIRECT_URL = 'home'  # Défini l'URL de redirection après une déconnexion réussie
