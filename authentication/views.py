@@ -1,5 +1,6 @@
 # authentication/views.py
 from django.contrib.auth import authenticate, login, logout
+from django.views.generic import View
 from django.shortcuts import render, redirect
 
 from . import forms
@@ -10,24 +11,30 @@ def logout_user(request):
     return redirect("login")
 
 
-def login_page(request):
-    # Gestion de la requete par défaut - GET
-    form = forms.LoginForm()
-    message = ""
-    # Gestion de la requete POST
-    if request.method == "POST":
-        form = forms.LoginForm(request.POST)
+class LoginPage(View):
+    form_class = forms.LoginForm
+    template_name = "authentication/login.html"
+
+    def get(self, request):
+        form = self.form_class()
+        message = ""
+        return render(
+                request, self.template_name, context={"form": form, "message": message}
+        )
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        message = ""
         if form.is_valid():
-            user = authenticate(  # Vérifie l'authenticité du couple nom/pwd
-                username=form.cleaned_data["username"],
-                password=form.cleaned_data["password"],
+            user = authenticate(
+                    username=form.cleaned_data["username"],
+                    password=form.cleaned_data["password"],
             )
             if user is not None:
-                login(request, user)  # Gère la connexion de l'utilisateur authentifié à la requête
+                login(request, user)
                 return redirect("home")
             else:
                 message = "Identifiants invalides."
-    # Retour en cas de GET ou POST sans erreur
-    return render(
-        request, "authentication/login.html", context={"form": form, "message": message}
-    )
+        return render(
+                request, self.template_name, context={"form": form, "message": message}
+        )
