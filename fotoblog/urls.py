@@ -15,7 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordChangeView, \
+    PasswordChangeDoneView, PasswordResetDoneView
 from django.urls import path
 
 import blog.views
@@ -27,6 +28,13 @@ urlpatterns = [
             redirect_authenticated_user=True,  # Utilise LOGIN_REDIRECT_URL dans settings.py
     ), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-
+    path('password-change/', PasswordChangeView.as_view(
+            template_name='authentication/password_change_form.html'
+    ), name='password_change'),
+    path('password-change/done/', PasswordChangeDoneView.as_view(
+            template_name='authentication/password_change_done.html'
+    ), name='password_change_done'),
+    # path('password_reset/', PasswordResetView.as_view(), name='password_reset'),
+    # path('password_reset/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('home/', blog.views.home, name='home'),
 ]
